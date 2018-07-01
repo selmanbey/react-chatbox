@@ -10,8 +10,9 @@ class UsersBox extends React.Component {
             );
         }
         return (
-            <div>
-                <ul>
+            <div className="users-box">
+                <p className="users-header">USERS</p>
+                <ul className="users-list">
                     {content}
                 </ul>
             </div>

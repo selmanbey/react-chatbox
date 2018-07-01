@@ -14,7 +14,7 @@ class MessageBox extends React.Component {
         }
 
         return (
-            <div>
+            <div className="chat-log-box">
                 {content}
             </div>
         );

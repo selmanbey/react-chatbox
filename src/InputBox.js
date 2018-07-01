@@ -40,12 +40,21 @@ class InputBox extends React.Component {
 
     render () {
         return (
-            <form onSubmit={this.sendLog}>
-                <input type="text" value={this.state.message} onChange={this.handleChange}/>
-                <input type="submit" value="Send"/>
+            <form className="input-form" onSubmit={this.sendLog}>
+                <input 
+                  className="chat-input-box"
+                  type="text"
+                  placeholder="Say Something!"
+                  value={this.state.message}
+                  onChange={this.handleChange}/>
+                <button
+                  className="send-button"
+                  type="submit">SEND</button>
             </form>
         );
     }
 }
 
 export default InputBox;
+
+// POSSIBLE ISSUES: (1) SENDING EMPTY MESSAGES WITH UNINTENDED "ENTER"

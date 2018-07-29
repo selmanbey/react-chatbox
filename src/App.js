@@ -31,7 +31,6 @@ class App extends Component {
 
   checkServer = (timestamp) => {
     if (this.lastUpdate + UPDATERATE < timestamp) {
-      console.log("Checking server");
       this.fetches();
       this.lastUpdate = timestamp;
     }
@@ -62,35 +61,47 @@ class App extends Component {
 
 
   render() {
-    console.log("App rendered, current user is", this.state.currentUser);
-    return (
-      <div className="container">
-        <LoginScreen
-            setUser={this.setCurrentUser}
-          />
-        <div className="header">
-          <h1 className="header-text">REACT CHAT BOX</h1>
-        </div>
+    if(this.state.currentUser) {
+      return (
+        <div className="container">
+          <div className="header">
+            <h1 className="header-text">REACT CHAT BOX</h1>
+          </div>
 
-        <div className="chat-log-container">
-          <MessageBox
-            className="chat-log-box"
-            messages={this.state.messages} />
-        </div>
+          <div className="chat-log-container">
+            <MessageBox
+              className="chat-log-box"
+              messages={this.state.messages} />
+          </div>
 
-        <div className="users-container">
-          <UsersBox
-            className="users-box"
-            users={this.state.users} />
-        </div>
+          <div className="users-container">
+            <UsersBox
+              className="users-box"
+              users={this.state.users} />
+          </div>
 
-        <div className="input-container">
-          <InputBox
-            currentUser={this.state.currentUser}/>
-        </div>
+          <div className="input-container">
+            <InputBox
+              currentUser={this.state.currentUser}/>
+          </div>
 
-      </div>
-    );
+        </div>
+      );
+    } else {
+      return (
+        <div className="container">
+          <div className="header">
+            <h1 className="header-text">REACT CHAT BOX</h1>
+          </div>
+
+          <LoginScreen
+              setUser={this.setCurrentUser}
+            />
+        </div>
+      );
+    }
+
+
   }
 }
 

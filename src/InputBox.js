@@ -12,8 +12,8 @@ class InputBox extends React.Component {
     }
 
     sendLog(event) {
+        event.preventDefault();
         let dt = new Date();
-        console.log("Before sending data to database:", this.props.currentUser);
         fetch('http://0.0.0.0:3500/chatlog', {
             method: 'post',
             headers: {

@@ -84,6 +84,7 @@ div.users-box {
   background-color: #ffffff;
   width: 100%;
   height: 100%;
+	overflow: scroll;
 }
 
 div.input-container {

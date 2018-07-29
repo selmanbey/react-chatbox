@@ -12,14 +12,14 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+          messages : [],
+          users: [],
+          currentUser: '',
+      };
+
     this.setCurrentUser = this.setCurrentUser.bind(this);
   }
-
-  state = {
-      messages : [],
-      users: [],
-      currentUser: '',
-  };
 
   lastUpdate = 0;
 
@@ -62,7 +62,7 @@ class App extends Component {
 
 
   render() {
-
+    console.log("App rendered, current user is", this.state.currentUser);
     return (
       <div className="container">
         <LoginScreen

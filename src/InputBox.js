@@ -13,7 +13,7 @@ class InputBox extends React.Component {
 
     sendLog(event) {
         let dt = new Date();
-        console.log("Event set curUser", this.props.currentUser);
+        console.log("Before sending data to database:", this.props.currentUser);
         fetch('http://0.0.0.0:3500/chatlog', {
             method: 'post',
             headers: {
@@ -40,7 +40,6 @@ class InputBox extends React.Component {
     }
 
     render () {
-        console.log("in render: ", this.props.currentUser)
         return (
             <form className="input-form" onSubmit={this.sendLog}>
                 <input

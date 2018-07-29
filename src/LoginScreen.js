@@ -14,6 +14,7 @@ class LoginScreen extends React.Component {
   }
 
   sendData(e) {
+      e.preventDefault();
       fetch('http://0.0.0.0:3500/login', {
           method: 'post',
           headers: {
@@ -26,7 +27,7 @@ class LoginScreen extends React.Component {
       }).then((res) => {
           res.json().then((content) => {
             if(content.success) {
-              this.props.setUser(this.state.username)
+              this.props.setUser(this.state.username);
             }
           });
       }).catch( (err) => {
@@ -44,7 +45,7 @@ class LoginScreen extends React.Component {
 
   render () {
     return(
-      <dialog open>
+      <dialog ref="loginDialog" open>
           <h1>LOGIN</h1>
           <form onSubmit={this.sendData}>
             <input type="text" placeholder="who are you?" value={this.state.username}

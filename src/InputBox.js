@@ -13,6 +13,7 @@ class InputBox extends React.Component {
 
     sendLog(event) {
         let dt = new Date();
+        console.log("Event set curUser", this.props.currentUser);
         fetch('http://0.0.0.0:3500/chatlog', {
             method: 'post',
             headers: {
@@ -21,7 +22,7 @@ class InputBox extends React.Component {
             },
             body: JSON.stringify({
                 content: this.state.message,
-                username: 'osman3',
+                username: this.props.currentUser,
                 time: dt.getHours() + ':' + dt.getMinutes()
             })
         }).then((res) => {
@@ -39,9 +40,10 @@ class InputBox extends React.Component {
     }
 
     render () {
+        console.log("in render: ", this.props.currentUser)
         return (
             <form className="input-form" onSubmit={this.sendLog}>
-                <input 
+                <input
                   className="chat-input-box"
                   type="text"
                   placeholder="Say Something!"

@@ -25,6 +25,9 @@ class LoginScreen extends React.Component {
           })
       }).then((res) => {
           res.json().then((content) => {
+            if(content.success) {
+              this.props.setUser(this.state.username)
+            }
           });
       }).catch( (err) => {
           console.log(err);

@@ -9,13 +9,25 @@ import './App.css';
 const UPDATERATE = 2000;
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.setCurrentUser = this.setCurrentUser.bind(this);
+  }
+
   state = {
       messages : [],
-
-      users: []
+      users: [],
+      currentUser: '',
   };
 
   lastUpdate = 0;
+
+  setCurrentUser(username) {
+    this.setState( {
+      currentUser: username
+    });
+  }
 
   checkServer = (timestamp) => {
     if (this.lastUpdate + UPDATERATE < timestamp) {
@@ -53,7 +65,9 @@ class App extends Component {
 
     return (
       <div className="container">
-        <LoginScreen />
+        <LoginScreen
+            setUser={this.setCurrentUser}
+          />
         <div className="header">
           <h1 className="header-text">REACT CHAT BOX</h1>
         </div>
@@ -71,7 +85,8 @@ class App extends Component {
         </div>
 
         <div className="input-container">
-          <InputBox />
+          <InputBox
+            currentUser={this.state.currentUser}/>
         </div>
 
       </div>

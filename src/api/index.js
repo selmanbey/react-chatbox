@@ -65,7 +65,16 @@ app.post('/chatlog', (req, res) => {
     let msg = req.body;
     let lastMsg = chatlog[chatlog.length - 1];
     msg._id = lastMsg._id + 1;
-    chatlog.push(req.body);
+    chatlog.push(msg);
+    res.json({success: true});
+});
+
+app.post('/login', (req, res) => {
+    let newUsr = req.body;
+
+    let lastUsr = users[users.length - 1];
+    newUsr._id = lastUsr._id + 1;
+    users.push(newUsr);
     res.json({success: true});
 });
 

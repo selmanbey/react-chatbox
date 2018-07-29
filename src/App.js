@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MessageBox from './MessageBox'
 import UsersBox from './UsersBox';
 import InputBox from './InputBox';
+import LoginScreen from './LoginScreen';
 import './App.css';
 
 
@@ -52,6 +53,7 @@ class App extends Component {
 
     return (
       <div className="container">
+        <LoginScreen />
         <div className="header">
           <h1 className="header-text">REACT CHAT BOX</h1>
         </div>

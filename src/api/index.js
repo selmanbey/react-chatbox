@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const PORT = 3500;
+const DELETE_TIMEOUT = 5000;
 
 const chatlog = [
     {
@@ -28,17 +29,38 @@ const chatlog = [
 const users = [
     {
         _id: 1,
-        username: "osman"
+        username: "osman",
+        lastSeen: 1532884951497
     },
     {
         _id: 2,
-        username: "osman2"
+        username: "osman2",
+        lastSeen: 1532884951497
     },
     {
         _id: 3,
-        username: "osman3"
+        username: "osman3",
+        lastSeen: 1532884951497
     }
 ]
+
+let pruneUsers = () => {
+    let now = (new Date()).getTime();
+    for(let i = users.length - 1; i >= 0; i--) {
+        if(now - users[i].lastSeen >= DELETE_TIMEOUT) {
+            console.log(users[i].username, 'pruned');
+            users.splice(i, 1);
+        }
+    }
+};
+
+let userAlive = (username) => {
+    for(let user of users) {
+        if(user.username === username) {
+            user.lastSeen = (new Date()).getTime();
+        }
+    }
+};
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -58,6 +80,9 @@ app.get('/users', (req, res) => {
 });
 
 app.get('/chatlog', (req, res) => {
+    let username = req.query.username;
+    userAlive(username);
+    pruneUsers();
     res.send(chatlog);
 });
 
@@ -73,8 +98,10 @@ app.post('/login', (req, res) => {
     let newUsr = req.body;
 
     let lastUsr = users[users.length - 1];
-    newUsr._id = lastUsr._id + 1;
+    newUsr._id = (lastUsr) ? lastUsr._id + 1 : 1;
+    newUsr.lastSeen = (new Date()).getTime();
     users.push(newUsr);
+    console.log(newUsr.username, 'logged in');
     res.json({success: true});
 });
 

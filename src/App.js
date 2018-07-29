@@ -45,7 +45,7 @@ class App extends Component {
     }).catch( (err) => {
       console.log(err);
     });
-    fetch('http://0.0.0.0:3500/chatlog').then((res) => {
+    fetch(`http://0.0.0.0:3500/chatlog?username=${this.state.currentUser}`).then((res) => {
       res.json().then( (messages) => {
         this.setState({messages: messages});
       });

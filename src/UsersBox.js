@@ -6,7 +6,7 @@ class UsersBox extends React.Component {
 
         for (let usr of this.props.users) {
             content.push(
-                <li>{usr.username}</li>
+                <li key={usr._id}>{usr.username}</li>
             );
         }
         return (

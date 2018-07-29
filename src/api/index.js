@@ -4,21 +4,41 @@ const app = express();
 
 const PORT = 3500;
 
-const chatlog = [{
-    username: "osman",
-    time: "10:40",
-    content: "Content osman"
-  },
-  {
-    username: "osman2",
-    time: "10:42",
-    content: "Content osman2"
-  },
-  {
-    username: "osman3",
-    time: "10:44",
-    content: "Content osman3"
-  }];
+const chatlog = [
+    {
+        _id: 1,
+        username: "osman",
+        time: "10:40",
+        content: "Content osman"
+    },
+    {
+        _id: 2,
+        username: "osman2",
+        time: "10:42",
+        content: "Content osman2"
+    },
+    {
+        _id: 3,
+        username: "osman3",
+        time: "10:44",
+        content: "Content osman3"
+    }
+];
+
+const users = [
+    {
+        _id: 1,
+        username: "osman"
+    },
+    {
+        _id: 2,
+        username: "osman2"
+    },
+    {
+        _id: 3,
+        username: "osman3"
+    }
+]
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,13 +54,6 @@ app.get('/', (req, res) => {
 });
 
 app.get('/users', (req, res) => {
-    let users = [{
-        username: "osman"
-      },
-      {
-        username: "osman3"
-      }]
-
     res.send(users);
 });
 
@@ -48,8 +61,10 @@ app.get('/chatlog', (req, res) => {
     res.send(chatlog);
 });
 
-
 app.post('/chatlog', (req, res) => {
+    let msg = req.body;
+    let lastMsg = chatlog[chatlog.length - 1];
+    msg._id = lastMsg._id + 1;
     chatlog.push(req.body);
     res.json({success: true});
 });

@@ -7,7 +7,7 @@ class MessageBox extends React.Component {
 
         for (let msg of this.props.messages) {
             content.push(
-                <Message username={msg.username}
+                <Message key={msg._id} username={msg.username}
                         time={msg.time}
                         content={msg.content}/>
             );

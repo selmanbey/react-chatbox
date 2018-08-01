@@ -89,15 +89,8 @@ class App extends Component {
       );
     } else {
       return (
-        <div className="container">
-          <div className="header">
-            <h1 className="header-text">REACT CHAT BOX</h1>
-          </div>
-
           <LoginScreen
-              setUser={this.setCurrentUser}
-            />
-        </div>
+              setUser={this.setCurrentUser}/>
       );
     }
 

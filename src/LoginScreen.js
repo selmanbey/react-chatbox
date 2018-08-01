@@ -45,13 +45,16 @@ class LoginScreen extends React.Component {
 
   render () {
     return(
-      <dialog ref="loginDialog" open>
-          <h1>LOGIN</h1>
-          <form onSubmit={this.sendData}>
-            <input type="text" placeholder="who are you?" value={this.state.username}
-            onChange={this.handleChange}/><br/>
-            <button>enter a username</button>
-          </form>
+      <dialog ref="loginDialog" class="login-dialog-box" open>
+          <h1 class="header-big">REACT CHAT BOX</h1>
+          <div class="form-container">
+            <form class="login-form" onSubmit={this.sendData}>
+              <label>LOGIN</label><br/>
+              <input class="login-input" type="text" placeholder="who are you?" value={this.state.username}
+              onChange={this.handleChange}/><br/>
+              <button class="login-button"></button>
+            </form>
+          </div>
       </dialog>
     );
   }

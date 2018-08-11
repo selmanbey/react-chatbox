@@ -12,29 +12,31 @@ class InputBox extends React.Component {
     }
 
     sendLog(event) {
-        event.preventDefault();
-        this.setState({
-          message: ''
-        });
-        let dt = new Date();
-        fetch('http://0.0.0.0:3500/chatlog', {
-            method: 'post',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                content: this.state.message,
-                username: this.props.currentUser,
-                time: dt.getHours() + ':' + dt.getMinutes()
-            })
-        }).then((res) => {
-            res.json().then((content) => {
-                //
-            });
-        }).catch( (err) => {
-            console.log(err);
-        } );
+      event.preventDefault();
+      if(this.state.message) {
+          this.setState({
+            message: ''
+          });
+          let dt = new Date();
+          fetch('http://0.0.0.0:3500/chatlog', {
+              method: 'post',
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  content: this.state.message,
+                  username: this.props.currentUser,
+                  time: dt.getHours() + ':' + dt.getMinutes()
+              })
+          }).then((res) => {
+              res.json().then((content) => {
+                  //
+              });
+          }).catch( (err) => {
+              console.log(err);
+          } );
+      };
     }
 
     handleChange(event) {

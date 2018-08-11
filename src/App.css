@@ -38,10 +38,14 @@ input, input::placeholder {
 
 h1 {
   font-family: 'Yanone Kaffeesatz', sans-serif;
+	background: -webkit-linear-gradient(-90deg, #252839 9%, #000000 87%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 div.container {
-  background-color: #89bdd3;
+	background-color: #89bdd3;
+  background: linear-gradient(#9ad3de, #89bdd3);
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -139,6 +143,7 @@ ul.users-list {
 	width: 100%;
 	height: 100%;
 	background-color: #89bdd3;
+	/* background: linear-gradient(#89bdd3, #9ad3de); */
 }
 .header-big {
 	text-align: center;
@@ -152,12 +157,13 @@ ul.users-list {
 	padding: 3%;
 	margin: 0 auto;
 	margin-top: 4%;
-	border: 1px solid black;
+	border: 1.2px solid black;
 	border-radius: 50%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	background-color: white;
+	animation: heartbeat 2.2s infinite;
 }
 .login-form {
 	font-family: 'Yanone Kaffeesatz', sans-serif;
@@ -165,7 +171,7 @@ ul.users-list {
 	text-align: center;
 }
 .login-label {
-	color: darkred;
+	color: #252839;
 }
 .login-input {
 	padding: 0.5em;
@@ -191,7 +197,15 @@ ul.users-list {
 	color: white;
 }
 
+@keyframes heartbeat {
+	0%, 100% {
+		border-color: black;
+	}
 
+	50% {
+		border-color: coral;
+	}
+}
 
 /*-----------------------------------------------------------------------------
                                         FONTS

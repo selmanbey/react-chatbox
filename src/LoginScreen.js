@@ -32,6 +32,7 @@ class LoginScreen extends React.Component {
           });
       }).catch( (err) => {
           console.log(err);
+          alert(`CANNOT CONNECT TO SERVER AT THE MOMENT. PLEASE TRY AGAIN. \n\n ${err}`)
       } );
 
   }

@@ -8,40 +8,18 @@ const DELETE_TIMEOUT = 5000;
 const chatlog = [
     {
         _id: 1,
-        username: "osman",
-        time: "10:40",
-        content: "Content osman"
+        username: "React Chat Box",
+        time: (new Date()).getHours() + ":" + (new Date()).getMinutes(),
+        content: "Welcome to the React Chat Box. Chat away!"
     },
-    {
-        _id: 2,
-        username: "osman2",
-        time: "10:42",
-        content: "Content osman2"
-    },
-    {
-        _id: 3,
-        username: "osman3",
-        time: "10:44",
-        content: "Content osman3"
-    }
 ];
 
 const users = [
     {
         _id: 1,
-        username: "osman",
+        username: "React Chat Box",
         lastSeen: 1532884951497
     },
-    {
-        _id: 2,
-        username: "osman2",
-        lastSeen: 1532884951497
-    },
-    {
-        _id: 3,
-        username: "osman3",
-        lastSeen: 1532884951497
-    }
 ]
 
 let pruneUsers = () => {

@@ -13,6 +13,9 @@ class InputBox extends React.Component {
 
     sendLog(event) {
         event.preventDefault();
+        this.setState({
+          message: ''
+        });
         let dt = new Date();
         fetch('http://0.0.0.0:3500/chatlog', {
             method: 'post',

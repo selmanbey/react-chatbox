@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { FaAngleRight } from 'react-icons/fa'
 
 class LoginScreen extends React.Component {
   constructor(props) {
@@ -45,14 +45,14 @@ class LoginScreen extends React.Component {
 
   render () {
     return(
-      <dialog ref="loginDialog" class="login-dialog-box" open>
-          <h1 class="header-big">REACT CHAT BOX</h1>
-          <div class="form-container">
-            <form class="login-form" onSubmit={this.sendData}>
-              <label>LOGIN</label><br/>
-              <input class="login-input" type="text" placeholder="who are you?" value={this.state.username}
+      <dialog ref="loginDialog" className="login-dialog-box" open>
+          <h1 className="header-big">REACT CHAT BOX</h1>
+          <div className="form-container">
+            <form className="login-form" onSubmit={this.sendData}>
+              <label className="login-label">LOGIN</label><br/>
+              <input className="login-input" type="text" placeholder="who are you?" value={this.state.username}
               onChange={this.handleChange}/><br/>
-              <button class="login-button"></button>
+              <button className="login-button"><FaAngleRight/></button>
             </form>
           </div>
       </dialog>

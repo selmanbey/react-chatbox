@@ -147,7 +147,7 @@ ul.users-list {
 }
 .header-big {
 	text-align: center;
-	font-size: 18vw;
+	font-size: 19vw;
 }
 .form-container {
 	width: 20vw;
@@ -156,14 +156,36 @@ ul.users-list {
 	min-height: 14em;
 	padding: 3%;
 	margin: 0 auto;
-	margin-top: 4%;
+	margin-top: 1%;
 	border: 1.2px solid black;
 	border-radius: 50%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	background-color: white;
+	background: white;
 	animation: border-heartbeat 2.2s infinite;
+}
+.form-container::before {
+	content:'';
+	position: absolute;
+	width: 3em;
+	height: 3em;
+	border: 1px solid black;
+	border-radius: inherit;
+	background: #252839;
+	bottom: 1%;
+	animation: move-the-ball-to-left 8s infinite;
+}
+.form-container::after {
+	content:'';
+	position: absolute;
+	width: 3em;
+	height: 3em;
+	border: 1px solid black;
+	border-radius: inherit;
+	background: #284f5f;
+	bottom: 1%;
+	animation: move-the-ball-to-right 8s infinite;
 }
 .login-form {
 	font-family: 'Yanone Kaffeesatz', sans-serif;
@@ -194,7 +216,6 @@ ul.users-list {
 	border-radius: 50%;
 	background-color: #252839;
 	color: white;
-	/* animation: background-heartbeat 2.2s infinite; */
 }
 
 @keyframes border-heartbeat {
@@ -207,13 +228,29 @@ ul.users-list {
 	}
 }
 
-@keyframes background-heartbeat {
+@keyframes move-the-ball-to-left {
 	0%, 100% {
-		background-color: #252839;
+		left: 2%;
+		background-color: #284f5f;
 	}
 
 	50% {
-		background-color: crimson;
+		left: 98%;
+		transform: translateX(-100%);
+		background-color: #000000;
+	}
+}
+
+@keyframes move-the-ball-to-right {
+	0%, 100% {
+		right: 2%;
+		background-color: #000000;
+	}
+
+	50% {
+		right: 98%;
+		transform: translateX(100%);
+		background-color: #284f5f;
 	}
 }
 

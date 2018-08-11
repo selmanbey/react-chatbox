@@ -163,7 +163,7 @@ ul.users-list {
 	flex-direction: column;
 	justify-content: center;
 	background-color: white;
-	animation: heartbeat 2.2s infinite;
+	animation: border-heartbeat 2.2s infinite;
 }
 .login-form {
 	font-family: 'Yanone Kaffeesatz', sans-serif;
@@ -189,21 +189,31 @@ ul.users-list {
 	color: white;
 }
 .login-button{
-	border: 1px solid darkred;
 	width: 3em;
 	height: 3em;
 	border-radius: 50%;
-	background-color: darkred;
+	background-color: #252839;
 	color: white;
+	/* animation: background-heartbeat 2.2s infinite; */
 }
 
-@keyframes heartbeat {
+@keyframes border-heartbeat {
 	0%, 100% {
-		border-color: black;
+		border-color: #252839;
 	}
 
 	50% {
-		border-color: coral;
+		border-color: lightblue;
+	}
+}
+
+@keyframes background-heartbeat {
+	0%, 100% {
+		background-color: #252839;
+	}
+
+	50% {
+		background-color: crimson;
 	}
 }
 

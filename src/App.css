@@ -38,9 +38,6 @@ input, input::placeholder {
 
 h1 {
   font-family: 'Yanone Kaffeesatz', sans-serif;
-	background: -webkit-linear-gradient(-90deg, #252839 9%, #000000 87%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
 }
 
 div.container {
@@ -148,6 +145,9 @@ ul.users-list {
 .header-big {
 	text-align: center;
 	font-size: 19vw;
+	background: -webkit-linear-gradient(-90deg, #252839 9%, #000000 87%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 .form-container {
 	width: 20vw;
@@ -254,6 +254,7 @@ ul.users-list {
 	}
 }
 
+
 /*-----------------------------------------------------------------------------
                                         FONTS
 -----------------------------------------------------------------------------*/
@@ -262,7 +263,9 @@ h1.header-text {
   font-size: 12vh;
 	font-style:normal;
 	font-weight:normal;
-  color: #252839;
+	background: -webkit-linear-gradient(-90deg, #252839 9%, #000000 87%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 p, strong, em, span, li {

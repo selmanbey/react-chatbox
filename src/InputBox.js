@@ -18,11 +18,12 @@ class InputBox extends React.Component {
             message: ''
           });
           let dt = new Date();
-          fetch('http://0.0.0.0:3500/chatlog', {
+          fetch('http://0.0.0.0:3400/chatlog', {
               method: 'post',
               headers: {
                   'Accept': 'application/json',
-                  'Content-Type': 'application/json'
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiY2hhdF91c2VyIn0.GK6768PTfnno8Q0rJL1rFQYZXAcqIe_pMMXWjcMkZbo'
               },
               body: JSON.stringify({
                   content: this.state.message,
@@ -30,9 +31,7 @@ class InputBox extends React.Component {
                   time: dt.getHours() + ':' + dt.getMinutes()
               })
           }).then((res) => {
-              res.json().then((content) => {
-                  //
-              });
+              // no need to do anything here
           }).catch( (err) => {
               console.log(err);
           } );

@@ -15,21 +15,19 @@ class LoginScreen extends React.Component {
 
   sendData(e) {
       e.preventDefault();
-      fetch('http://0.0.0.0:3500/login', {
+      fetch('http://0.0.0.0:3400/users', {
           method: 'post',
           headers: {
               'Accept': 'application/json',
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiY2hhdF91c2VyIn0.GK6768PTfnno8Q0rJL1rFQYZXAcqIe_pMMXWjcMkZbo'
           },
           body: JSON.stringify({
               username: this.state.username,
+              lastseen: Date.now(),
           })
       }).then((res) => {
-          res.json().then((content) => {
-            if(content.success) {
-              this.props.setUser(this.state.username);
-            }
-          });
+          this.props.setUser(this.state.username);
       }).catch( (err) => {
           console.log(err);
           alert(`CANNOT CONNECT TO SERVER AT THE MOMENT. PLEASE TRY AGAIN. \n\n ${err}`)

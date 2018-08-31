@@ -6,7 +6,8 @@ import LoginScreen from './LoginScreen';
 import './App.css';
 
 
-const UPDATERATE = 500;
+const UPDATERATE = 100;
+const DELETE_TIMEOUT = 900000;   // 15 minutes
 
 class App extends Component {
   constructor(props) {
@@ -19,6 +20,8 @@ class App extends Component {
       };
 
     this.setCurrentUser = this.setCurrentUser.bind(this);
+    this.pruneUsers = this.pruneUsers.bind(this);
+    this.keepUserAlive = this.keepUserAlive.bind(this);
   }
 
   lastUpdate = 0;
@@ -28,6 +31,42 @@ class App extends Component {
       currentUser: username
     });
   }
+
+  pruneUsers = () => {
+    let timeout = Date.now() - DELETE_TIMEOUT;
+
+    fetch(`http://0.0.0.0:3400/users?lastseen=lte.${timeout}`, {
+        method: 'delete',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Methods": "GET, POST,HEAD, OPTIONS,PUT, DELETE",
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiY2hhdF91c2VyIn0.GK6768PTfnno8Q0rJL1rFQYZXAcqIe_pMMXWjcMkZbo'
+        }
+    }).then((res) => {
+        // console.log(res.status)
+    }).catch( (err) => {
+        console.log(err);
+    } );
+  };
+
+  keepUserAlive = (username) => {
+    let now = Date.now();
+    fetch(`http://0.0.0.0:3400/users?username=eq.${ username }`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiY2hhdF91c2VyIn0.GK6768PTfnno8Q0rJL1rFQYZXAcqIe_pMMXWjcMkZbo'
+        },
+        body: JSON.stringify({
+          'lastseen': now
+        }),
+    }).then((res) => {
+      //
+    }).catch( (err) => {
+        console.log(err);
+    } );
+  };
 
   checkServer = (timestamp) => {
     if (this.lastUpdate + UPDATERATE < timestamp) {
@@ -39,15 +78,18 @@ class App extends Component {
 
   fetches = () => {
     if (this.state.currentUser !== "NULL") {
-      fetch('http://0.0.0.0:3500/users').then((res) => {
-        res.json().then( (users) => {
+      this.pruneUsers();
+      let user = this.state.currentUser;
+      this.keepUserAlive(user);
+      fetch('http://0.0.0.0:3400/users?order=username.asc').then((res) => {
+        res.json().then((users) => {
           this.setState({users: users});
         });
       }).catch( (err) => {
         console.log(err);
       });
 
-      fetch(`http://0.0.0.0:3500/chatlog?username=${this.state.currentUser}`).then((res) => {
+      fetch(`http://0.0.0.0:3400/chatlog`).then((res) => {
         res.json().then( (messages) => {
           this.setState({messages: messages});
         });
@@ -55,17 +97,18 @@ class App extends Component {
         console.log(err);
       });
 
-      fetch('http://0.0.0.0:3500').then((res) => {
-        res.json().then( (activeUsers) => {
-          if (!activeUsers.includes(this.state.currentUser)) {
-            this.setState({
-              currentUser: "NULL"
-            })
-          };
-        });
-      }).catch( err => {
-        console.log(err)
-      });
+      // fetch('http://0.0.0.0:3500').then((res) => {
+      //   console.log(res);
+      //   // res.json().then( (activeUsers) => {
+      //   //   if (!activeUsers.includes(this.state.currentUser)) {
+      //   //     this.setState({
+      //   //       currentUser: "NULL"
+      //   //     })
+      //   //   };
+      //   // });
+      // }).catch( err => {
+      //   console.log(err)
+      // });
     }
   }
 

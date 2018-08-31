@@ -6,7 +6,7 @@ import LoginScreen from './LoginScreen';
 import './App.css';
 
 
-const UPDATERATE = 2000;
+const UPDATERATE = 500;
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class App extends Component {
     this.state = {
           messages : [],
           users: [],
-          currentUser: '',
+          currentUser: 'NULL',
       };
 
     this.setCurrentUser = this.setCurrentUser.bind(this);
@@ -38,20 +38,35 @@ class App extends Component {
   }
 
   fetches = () => {
-    fetch('http://0.0.0.0:3500/users').then((res) => {
-      res.json().then( (users) => {
-        this.setState({users: users});
+    if (this.state.currentUser !== "NULL") {
+      fetch('http://0.0.0.0:3500/users').then((res) => {
+        res.json().then( (users) => {
+          this.setState({users: users});
+        });
+      }).catch( (err) => {
+        console.log(err);
       });
-    }).catch( (err) => {
-      console.log(err);
-    });
-    fetch(`http://0.0.0.0:3500/chatlog?username=${this.state.currentUser}`).then((res) => {
-      res.json().then( (messages) => {
-        this.setState({messages: messages});
+
+      fetch(`http://0.0.0.0:3500/chatlog?username=${this.state.currentUser}`).then((res) => {
+        res.json().then( (messages) => {
+          this.setState({messages: messages});
+        });
+      }).catch( (err) => {
+        console.log(err);
       });
-    }).catch( (err) => {
-      console.log(err);
-    });
+
+      fetch('http://0.0.0.0:3500').then((res) => {
+        res.json().then( (activeUsers) => {
+          if (!activeUsers.includes(this.state.currentUser)) {
+            this.setState({
+              currentUser: "NULL"
+            })
+          };
+        });
+      }).catch( err => {
+        console.log(err)
+      });
+    }
   }
 
   componentDidMount() {
@@ -61,7 +76,7 @@ class App extends Component {
 
 
   render() {
-    if(this.state.currentUser) {
+    if(this.state.currentUser !== "NULL") {
       return (
         <div className="container">
           <div className="header">

@@ -8,7 +8,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'react_chatbox',
-  password: 'smyecretpassword',
+  password: 'mysecretpassword',
   port: 5432,
 });
 

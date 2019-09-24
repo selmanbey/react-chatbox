@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import MessageBox from './MessageBox'
-import UsersBox from './UsersBox';
-import InputBox from './InputBox';
-import LoginScreen from './LoginScreen';
+import MessageBox from './components/MessageBox'
+import UsersBox from './components/UsersBox';
+import InputBox from './components/InputBox';
+import LoginScreen from './components/LoginScreen';
 import './App.css';
 
 
-const UPDATERATE = 2000;
+const UPDATE_RATE = 2000;
 
 class App extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   checkServer = (timestamp) => {
-    if (this.lastUpdate + UPDATERATE < timestamp) {
+    if (this.lastUpdate + UPDATE_RATE < timestamp) {
       this.fetches();
       this.lastUpdate = timestamp;
     }

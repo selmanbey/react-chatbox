@@ -13,10 +13,10 @@ class App extends Component {
     super(props);
 
     this.state = {
-          messages : [],
-          users: [],
-          currentUser: '',
-      };
+      messages : [],
+      users: [],
+      currentUser: ''
+    };
 
     this.setCurrentUser = this.setCurrentUser.bind(this);
   }
@@ -24,9 +24,7 @@ class App extends Component {
   lastUpdate = 0;
 
   setCurrentUser(username) {
-    this.setState( {
-      currentUser: username
-    });
+    this.setState({ currentUser: username });
   }
 
   checkServer = (timestamp) => {
@@ -59,7 +57,6 @@ class App extends Component {
     window.requestAnimationFrame(this.checkServer);
   }
 
-
   render() {
     if(this.state.currentUser) {
       return (
@@ -81,20 +78,16 @@ class App extends Component {
           </div>
 
           <div className="input-container">
-            <InputBox
-              currentUser={this.state.currentUser}/>
+            <InputBox currentUser={this.state.currentUser}/>
           </div>
 
         </div>
       );
     } else {
       return (
-          <LoginScreen
-              setUser={this.setCurrentUser}/>
+          <LoginScreen setUser={this.setCurrentUser}/>
       );
     }
-
-
   }
 }
 

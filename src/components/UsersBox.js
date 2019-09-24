@@ -1,23 +1,19 @@
 import React from 'react';
 
-class UsersBox extends React.Component {
-    render () {
-        let content = [];
+const UsersBox = props => {
+  let content = [];
 
-        for (let usr of this.props.users) {
-            content.push(
-                <li key={usr._id}>{usr.username}</li>
-            );
-        }
-        return (
-            <div className="users-box">
-                <p className="users-header">USERS</p>
-                <ul className="users-list">
-                    {content}
-                </ul>
-            </div>
-        );
-    }
+  for (let usr of props.users) {
+    content.push( <li key={ usr._id }> { usr.username } </li> );
+  }
+  return (
+      <div className="users-box">
+          <p className="users-header">USERS</p>
+          <ul className="users-list">
+              { content }
+          </ul>
+      </div>
+  );
 }
 
 export default UsersBox;

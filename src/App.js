@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import MessageBox from './MessageBox'
-import UsersBox from './UsersBox';
-import InputBox from './InputBox';
-import LoginScreen from './LoginScreen';
+import MessageBox from './components/MessageBox'
+import UsersBox from './components/UsersBox';
+import InputBox from './components/InputBox';
+import LoginScreen from './components/LoginScreen';
 import './App.css';
 
 
-const UPDATERATE = 2000;
+const UPDATE_RATE = 2000;
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-          messages : [],
-          users: [],
-          currentUser: '',
-      };
+      messages : [],
+      users: [],
+      currentUser: ''
+    };
 
     this.setCurrentUser = this.setCurrentUser.bind(this);
   }
@@ -24,13 +24,11 @@ class App extends Component {
   lastUpdate = 0;
 
   setCurrentUser(username) {
-    this.setState( {
-      currentUser: username
-    });
+    this.setState({ currentUser: username });
   }
 
   checkServer = (timestamp) => {
-    if (this.lastUpdate + UPDATERATE < timestamp) {
+    if (this.lastUpdate + UPDATE_RATE < timestamp) {
       this.fetches();
       this.lastUpdate = timestamp;
     }
@@ -59,7 +57,6 @@ class App extends Component {
     window.requestAnimationFrame(this.checkServer);
   }
 
-
   render() {
     if(this.state.currentUser) {
       return (
@@ -81,20 +78,16 @@ class App extends Component {
           </div>
 
           <div className="input-container">
-            <InputBox
-              currentUser={this.state.currentUser}/>
+            <InputBox currentUser={this.state.currentUser}/>
           </div>
 
         </div>
       );
     } else {
       return (
-          <LoginScreen
-              setUser={this.setCurrentUser}/>
+          <LoginScreen setUser={this.setCurrentUser}/>
       );
     }
-
-
   }
 }
 
